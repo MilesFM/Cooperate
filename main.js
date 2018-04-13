@@ -2,8 +2,7 @@
 
 // Game setup
 function start() {
-    let music = new Audio("./The-Curtain-Rises.mp3");
-    music.play();
+    document.addEventListener("click", onClick);
 }
 
 // Game logic
