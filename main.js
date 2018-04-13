@@ -1,11 +1,17 @@
-function start() {
+"use strict";
 
+// Game setup
+function start() {
+    let music = new Audio("./The-Curtain-Rises.mp3");
+    music.play();
 }
 
+// Game logic
 function update() {
 
 }
 
+// Game rendering
 function draw() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
