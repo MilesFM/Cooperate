@@ -38,6 +38,18 @@ function drawSquare(x, y, w, h, style) {
     context.fillRect(x, y, w, h);
 }
 
+function drawSquareNoFill(x, y, w, h, style, lineWidth) {
+    if (style !== undefined) {
+        context.strokeStyle = style;
+    }
+    if (lineWidth !== undefined) {
+        context.lineWidth = lineWidth;
+    }
+    context.beginPath();
+    context.rect(x, y, w, h);
+    context.stroke();
+}
+
 /**
  * 
  * @param {number} x 
