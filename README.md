@@ -1,2 +1,2 @@
 # Cooperate
-Cooperate is a WIP game in JavaScript based on the The Prisoner's Dilemma.
+This is the branch for the future C++ version written in SFML.
