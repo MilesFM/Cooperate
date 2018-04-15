@@ -3,6 +3,7 @@
 // Game setup
 function start() {
     document.addEventListener("click", onClick);
+    document.addEventListener("mousemove", mouseMove);
 
     buttonsSetup();
 }
@@ -25,6 +26,8 @@ function draw() {
     singlePlayerButton.draw();
 
     drawText("Cooperate", canvas.width/2, canvas.height/2-200, "red", "50px Arial", "center");
+
+    drawImage("./assets/Cursor.png", cursorPos.x, cursorPos.y, 16, 16);
 }
 
 function buttonsSetup() {

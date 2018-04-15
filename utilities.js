@@ -89,3 +89,10 @@ class Audio {
         delete this.source;
     }
 }
+
+
+function drawImage(src, x, y, w, h) {
+    let img = new Image();
+    img.src = src;
+    context.drawImage(img, x, y, w, h);
+}

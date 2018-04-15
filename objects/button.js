@@ -37,7 +37,12 @@ class button {
         this.pressed = false;
 
         // For multiple click events
-        this.clickEventNum = clickArray.push();
+        this.clickEventNum = clickArray.push((event) => {
+            if ((event.clientX >= this.x && event.clientX <= this.x+this.w) && (event.clientY >= this.y && event.clientY <=  this.y+this.h)) {
+                this.pressed = true;
+            }
+            return;
+        });
     }
     draw() {
         /*
@@ -66,7 +71,7 @@ class button {
         return;
     }
     removeEvent() {
-        //clickArray = clickArray.splice();
+        clickArray = clickArray.splice(clickEventNum-1, 1);
     }
 }
 
