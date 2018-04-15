@@ -14,6 +14,9 @@ window.onload = () => {
     canvas.innerHTML = "Your browser doesn't support HTML Canvas";
     document.body.appendChild(canvas);
     AudioContext = AudioContext||webkitAudioContext;
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
     
     start();
 

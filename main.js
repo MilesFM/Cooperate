@@ -3,7 +3,8 @@
 // Game setup
 function start() {
     document.addEventListener("click", onClick);
-    button1 = new genericButton(200, 200, 100, 50, "thing");
+
+    buttonsSetup();
 }
 
 // Game logic
@@ -19,7 +20,13 @@ function draw() {
     // Background
     drawSquare(0, 0, canvas.width, canvas.height, "#000");
 
-    button1.draw();
+    singlePlayerButton.x = (canvas.width / 2) - singlePlayerButton.w/2;
+    singlePlayerButton.y = (canvas.height / 2) - singlePlayerButton.h/2  - 125;
+    singlePlayerButton.draw();
 
     drawText("Cooperate", canvas.width/2, canvas.height/2-200, "red", "50px Arial", "center");
+}
+
+function buttonsSetup() {
+    singlePlayerButton = new genericButton(null, null, 260, 75, "Single Player");
 }

@@ -1,3 +1,3 @@
 "use strict";
 
-let button1;
+let singlePlayerButton;
