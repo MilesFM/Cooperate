@@ -1,11 +1,15 @@
 # Cooperate
 Cooperate is a WIP game in JavaScript based on the The Prisoner's Dilemma. It is being made mainly for my own enjoyment and anyone else who wants to help. Bare in mind this will take a while due to other commitments.
 
+### Website
+The current website to view the project is on [GitHub Pages](https://milesfm.github.io/Cooperate/) however this will be changed in the future once mutliplayer comes out and the GitHub Pages link won't work.
+
 ## Planned features
 * Custom AI
 * Multiplayer (in the far future) using 
 * An itch.io page
 * A C++ version (hopefully)
+* A website
 
 ## Libraries
 * The game is planned to use sockets.io and express with a node.js server.
