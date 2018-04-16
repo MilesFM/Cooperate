@@ -9,6 +9,8 @@ const tickRate = 10;
 let drawInterval;
 let updateInterval;
 
+let scene = 0;
+
 // Sets up game
 window.onload = () => {
     canvas.innerHTML = "Your browser doesn't support HTML Canvas";
@@ -20,9 +22,9 @@ window.onload = () => {
     
     start();
 
-    updateInterval = setInterval(() => {
+    /*updateInterval = setInterval(() => {
         update();
-    }, tickRate);
+    }, tickRate);*/
 
     drawInterval = setInterval(() => {
         draw();

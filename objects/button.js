@@ -36,10 +36,19 @@ class button {
         this.disabled = false;
         this.pressed = false;
 
-        // For multiple click events
-        this.clickEventNum = clickArray.push((event) => {
-            if ((event.clientX >= this.x && event.clientX <= this.x+this.w) && (event.clientY >= this.y && event.clientY <=  this.y+this.h)) {
+        // When the mouse is clicked
+        this.mouseDownEventNum = mouseDownArray.push((event) => {
+            if ((event.clientX >= this.x && event.clientX <= this.x+this.w) && (event.clientY >= this.y && event.clientY <=  this.y+this.h) && (event.button == 0)) {
                 this.pressed = true;
+                this.clickOnButton();
+            }
+            return;
+        });
+
+        // When the mouse is released
+        this.mouseUpEventNum = mouseUpArray.push((event) => {
+            if (event.button == 0) {
+                this.pressed = false;
             }
             return;
         });
@@ -71,7 +80,7 @@ class button {
         return;
     }
     removeEvent() {
-        clickArray = clickArray.splice(clickEventNum-1, 1);
+        mouseDownArray = mouseDownArray.splice(mouseDownEventNum-1, 1);
     }
 }
 
