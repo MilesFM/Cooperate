@@ -32,23 +32,6 @@ function draw() {
     drawImage("./assets/Cursor.png", cursorPos.x, cursorPos.y, 16, 16);
 }
 
-function buttonsSetup() {
-    singlePlayerButton = new genericButton(null, null, 260, 75, "Singleplayer");
-    singlePlayerButton.clickOnButton = () => {
-        console.log("thing");
-        scene = 1;
-    };
-
-    multiplayerPlayerButton = new genericButton(null, null, 260, 75, "Multiplayer");
-    multiplayerPlayerButton.disabled = true;
-
-    aiButton = new genericButton(null, null, 260, 75, "AI Script");
-    aiButton.disabled = true;
-
-    aboutButton = new genericButton(null, null, 260, 75, "About");
-    aboutButton.disabled = true;
-}
-
 // Main Menu scene
 function menuDraw() {
     // Background
@@ -71,4 +54,39 @@ function menuDraw() {
     aboutButton.draw();
 
     drawText("Cooperate", canvas.width/2, canvas.height/2-200, "red", "50px Arial", "center");
+}
+
+function buttonsSetup() {
+    // Main Menu
+
+    singlePlayerButton = new genericButton(null, null, 260, 75, "Singleplayer");
+    singlePlayerButton.clickOnButton = () => {
+        console.log("thing");
+        singlePlayerStart();
+        scene = 1;
+    };
+
+    multiplayerPlayerButton = new genericButton(null, null, 260, 75, "Multiplayer");
+    multiplayerPlayerButton.disabled = true;
+
+    aiButton = new genericButton(null, null, 260, 75, "AI Script");
+    aiButton.disabled = true;
+
+    aboutButton = new genericButton(null, null, 260, 75, "About");
+    aboutButton.disabled = true;
+
+    // Main Menu
+
+    // Singleplayer
+
+    coopButton = new genericButton(null, null, 225, 75, "Cooperate");
+    coopButton.clickOnButton = () => {
+        myMoney += 10;
+    }
+    defectButton = new genericButton(null, null, 225, 75, "Defect");
+    defectButton.clickOnButton = () => {
+        myMoney -= 10;
+    }
+
+    // Singleplayer
 }
