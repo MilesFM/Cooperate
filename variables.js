@@ -8,7 +8,10 @@ let aboutButton;
 let coopButton;
 let defectButton;
 
-let myMoney;
+let player1Money;
 let aiMoney;
+
+let playerCoop = null;
+let aiCoop = null;
 
 let cursorPos = new Vector2(0, 0);

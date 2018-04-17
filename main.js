@@ -81,11 +81,13 @@ function buttonsSetup() {
 
     coopButton = new genericButton(null, null, 225, 75, "Cooperate");
     coopButton.clickOnButton = () => {
-        myMoney += 10;
+        playerCoop = true;
+        aiCoop = ai(playerCoop, aiMoney, player1Money);
     }
     defectButton = new genericButton(null, null, 225, 75, "Defect");
     defectButton.clickOnButton = () => {
-        myMoney -= 10;
+        playerCoop = false;
+        aiCoop = ai(playerCoop, aiMoney, player1Money);
     }
 
     // Singleplayer
