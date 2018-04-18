@@ -28,10 +28,16 @@ function singlePlayerStart() {
     player1Money = 2000;
     aiMoney = 2000;
     winner = null;
+    //getAiScipt();
 }
 
 function aiVsPlayer() {
-    aiCoop = ai(player1Coop, aiMoney, player1Money);
+    try {
+        aiCoop = ai(player1Coop, aiMoney, player1Money);
+    } catch(err) {
+        console.error(err);
+    }
+    
     if (player1Coop && aiCoop) {
         player1Money += 25;
         aiMoney += 25;
@@ -53,4 +59,15 @@ function aiVsPlayer() {
     } else if ((aiMoney <= 0) || (player1Money >= 5000)) {
         winner = "PLAYER";
     }
+}
+
+// Gets the script and evaluates it to replace the ai() function
+function getAiScipt(scriptLocation) {
+    let req = new XMLHttpRequest();
+    req.responseType = "text";
+    req.open("GET", null, true);
+    req.onreadystatechange = () => {
+        eval(req.responseText);
+    };
+    req.send(null);
 }
