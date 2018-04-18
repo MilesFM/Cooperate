@@ -61,7 +61,6 @@ function buttonsSetup() {
 
     singlePlayerButton = new genericButton(null, null, 260, 75, "Singleplayer");
     singlePlayerButton.clickOnButton = () => {
-        console.log("thing");
         singlePlayerStart();
         scene = 1;
     };
@@ -81,13 +80,13 @@ function buttonsSetup() {
 
     coopButton = new genericButton(null, null, 225, 75, "Cooperate");
     coopButton.clickOnButton = () => {
-        playerCoop = true;
-        aiCoop = ai(playerCoop, aiMoney, player1Money);
+        player1Coop = true;
+        aiVsPlayer();
     }
     defectButton = new genericButton(null, null, 225, 75, "Defect");
     defectButton.clickOnButton = () => {
-        playerCoop = false;
-        aiCoop = ai(playerCoop, aiMoney, player1Money);
+        player1Coop = false;
+        aiVsPlayer();
     }
 
     // Singleplayer

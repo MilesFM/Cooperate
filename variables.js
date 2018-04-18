@@ -11,7 +11,7 @@ let defectButton;
 let player1Money;
 let aiMoney;
 
-let playerCoop = null;
+let player1Coop = null;
 let aiCoop = null;
 
 let cursorPos = new Vector2(0, 0);

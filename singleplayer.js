@@ -20,3 +20,20 @@ function singlePlayerStart() {
     player1Money = 2000;
     aiMoney = 2000;
 }
+
+function aiVsPlayer() {
+    aiCoop = ai(player1Coop, aiMoney, player1Money);
+    if (player1Coop && aiCoop) {
+        player1Money += 25;
+        aiMoney += 25;
+    } else if (player1Coop && !aiCoop) {
+        player1Money -= 50;
+        aiMoney += 100;
+    } else if (!player1Coop && aiCoop) {
+        aiMoney -= 50;
+        player1Money += 100;
+    } else {
+        aiMoney -= 25;
+        player1Money -= 25;
+    }
+}
