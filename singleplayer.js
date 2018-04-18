@@ -13,12 +13,21 @@ function singlePlayerDraw() {
     drawText(`My total money: $${player1Money}`, 2, 25, "cyan", "25px Arial", "left");
     drawText(`AI total money: $${aiMoney}`, canvas.width-2, 25, "red", "25px Arial", "right");
 
-    drawText("SINGLEPLAYER WIP", canvas.width/2, canvas.height/2-125, "red", "50px Arial", "center");
+    if (winner == "AI") {
+        drawText("AI WON", canvas.width/2, canvas.height/2-125, "red", "50px Arial", "center");
+    } else if (winner == "PLAYER") {
+        drawText("PLAYER WON", canvas.width/2, canvas.height/2-125, "red", "50px Arial", "center");
+    } else if (winner = "DRAW") {
+        drawText("DRAW", canvas.width/2, canvas.height/2-125, "red", "50px Arial", "center");
+    } else {
+        drawText("SINGLEPLAYER", canvas.width/2, canvas.height/2-125, "red", "50px Arial", "center");
+    }
 }
 
 function singlePlayerStart() {
     player1Money = 2000;
     aiMoney = 2000;
+    winner = null;
 }
 
 function aiVsPlayer() {
@@ -35,5 +44,13 @@ function aiVsPlayer() {
     } else {
         aiMoney -= 25;
         player1Money -= 25;
+    }
+
+    if (((aiMoney >= 5000) && (player1Money >= 5000)) || ((aiMoney <= 0) && (player1Money <= 0))) {
+        winner = "DRAW";
+    } else if ((player1Money <= 0) || (aiMoney >= 5000)) {
+        winner = "AI";
+    } else if ((aiMoney <= 0) || (player1Money >= 5000)) {
+        winner = "PLAYER";
     }
 }

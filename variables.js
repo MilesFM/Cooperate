@@ -13,5 +13,7 @@ let aiMoney;
 
 let player1Coop = null;
 let aiCoop = null;
+ 
+let winner = null;
 
 let cursorPos = new Vector2(0, 0);

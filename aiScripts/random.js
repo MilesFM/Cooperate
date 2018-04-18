@@ -6,5 +6,5 @@
  * @param {number} opMoney 
  */
 function ai(playerState, money, opMoney) {
-    return false;
+    return (Math.round(Math.random() * 1) == true ? true : false);
 }
