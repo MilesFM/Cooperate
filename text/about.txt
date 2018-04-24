@@ -1,0 +1,10 @@
+Cooperate is a game that is based on The Prisoners Dilemma. 
+ 
+In this game there only a few rules, but before that there are only two actions either player can do.
+The first is to cooperate, or to trust/work with the other player. The second is to defect, or to not trust/no work with the other player.
+
+The rules are that if both players cooperate, then both gain $25. 
+If player one cooperates and player two doesn't, then player one loses $100 and player two gains $50 and vice versa.
+If both players defect, both lose $25.
+
+Whoever makes it to $3000 first or gets their opponent to $0, then that player wins.

@@ -90,9 +90,69 @@ class Audio {
     }
 }
 
-
 function drawImage(src, x, y, w, h) {
     let img = new Image();
     img.src = src;
     context.drawImage(img, x, y, w, h);
+}
+
+let aiScriptElement;
+// Gets the script and uses it
+function getAIScript(scriptLocation) {
+    let req = new XMLHttpRequest();
+    req.responseType = "text";
+    req.open("GET", scriptLocation, true);
+    req.onreadystatechange = () => {
+        try {
+            if (aiScriptElement != undefined) {
+                aiScriptElement.parentNode.removeChild(aiScriptElement);
+            }
+            aiScriptElement = document.createElement("script");
+            aiScriptElement.innerHTML = req.responseText;
+
+            document.body.appendChild(aiScriptElement);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+    req.send(null);
+}
+
+/**
+ * Gets the file and writes the contents to the passed object to .text
+ * @param {string}
+ * @param {object}
+ */
+function getFile(fileLocation, fileContents) {
+    let req = new XMLHttpRequest();
+    req.responseType = "text";
+    req.open("GET", fileLocation, true);
+    req.onreadystatechange = () => {
+        try {
+            fileContents.text = req.responseText;
+        } catch (err) {
+            console.error(err);
+        }
+    };
+    req.send(null);
+}
+
+function wrapText(drawTextFuncInput, maxWidth, lineHeight) {
+    var words = drawTextFuncInput.text.split(' ');
+    var line = '';
+
+    for(var n = 0; n < words.length; n++) {
+        var testLine = line + words[n] + ' ';
+        var metrics = context.measureText(testLine);
+        var testWidth = metrics.width;
+        if (testWidth > maxWidth && n > 0) {
+            drawText(line, drawTextFuncInput.x, drawTextFuncInput.y, drawTextFuncInput.style, drawTextFuncInput.font, drawTextFuncInput.textAlign);
+            line = words[n] + ' ';
+            y += lineHeight;
+        }
+        else {
+            line = testLine;
+        }
+    }
+    drawText(line, drawTextFuncInput.x, drawTextFuncInput.y, drawTextFuncInput.style, drawTextFuncInput.font, drawTextFuncInput.textAlign);
 }

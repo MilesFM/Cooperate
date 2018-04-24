@@ -1,10 +1,15 @@
 "use strict";
 
+let aiScript;
+let textThing;
+
 // Game setup
 function start() {
     document.addEventListener("mousedown", onMouseDown);
     document.addEventListener("mouseup", onMouseUp);
     document.addEventListener("mousemove", mouseMove);
+
+    getAIScript("aiScripts/defectdefect-coopcoop.js");
 
     buttonsSetup();
 }
@@ -53,7 +58,17 @@ function menuDraw() {
     aboutButton.y = (canvas.height / 2) - aboutButton.h/2  + 175;
     aboutButton.draw();
 
-    drawText("Cooperate", canvas.width/2, canvas.height/2-200, "red", "50px Arial", "center");
+    drawText("Cooperate", canvas.width/2, canvas.height/2-200, "red", "50px Arial", "centre");
+
+    if (aboutPageShow) {
+        drawSquare(canvas.width/5, canvas.height/5, canvas.width - (canvas.width/2.5), canvas.height - (canvas.height/2.5), "darkgrey");
+
+        closeAboutButton.x = (canvas.width / 2) - (closeAboutButton.w/2);
+        closeAboutButton.y = (canvas.height / 2) + 100;
+        closeAboutButton.draw();
+
+        //wrapText({text: "you aint working thing", x: 300, y: 300, style: "blue", font: "40px Arial", textAlign: "left"}, 20, 15);
+    }
 }
 
 function buttonsSetup() {
@@ -72,7 +87,14 @@ function buttonsSetup() {
     aiButton.disabled = true;
 
     aboutButton = new genericButton(null, null, 260, 75, "About");
-    aboutButton.disabled = true;
+    aboutButton.clickOnButton = () => {
+        aboutPageShow = true;
+    };
+
+    closeAboutButton = new genericButton(null, null, 208, 60, "Close");
+    closeAboutButton.clickOnButton = () => {
+        aboutPageShow = false;
+    };
 
     // Main Menu
 

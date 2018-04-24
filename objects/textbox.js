@@ -1,23 +1,8 @@
 "use strict";
 
-// For interactive buttons
-/**
- * @class
- */
-class button {
-    /**
-     * 
-     * @param {number} x 
-     * @param {number} y 
-     * @param {number} w 
-     * @param {number} h 
-     * @param {string} text 
-     * @param {string} colour 
-     * @param {string} textColour 
-     * @param {string} borderColour
-     * @param {number} scaleFactor
-     */
-    constructor(x, y, w, h, text, colour, textColour, borderColour, scaleFactor) {
+
+class textBox {
+    constructor(x, y, w, h, predefinedtText, colour, textColour, borderColour, scaleFactor) {
         this.x = x;
         this.y = y;
         this.w = w;
@@ -81,20 +66,5 @@ class button {
     }
     removeEvent() {
         mouseDownArray = mouseDownArray.splice(mouseDownEventNum-1, 1);
-    }
-}
-
-// This button is used where I just want to use a simple button
-class genericButton extends button {
-    /**
-     * 
-     * @param {number} x 
-     * @param {number} y 
-     * @param {number} w 
-     * @param {number} h 
-     * @param {string} text 
-     */
-    constructor(x, y, w, h, text) {
-        super(x, y, w, h, text, "white", "black", "grey", 0.2);
     }
 }

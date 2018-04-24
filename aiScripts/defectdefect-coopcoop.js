@@ -10,5 +10,11 @@
  * Return true to Cooperate, return false to defect
  */
 function ai(playerStateLast, money, opMoney) {
-    return (Math.round(Math.random() * 1) == true ? true : false);
+    console.log(playerStateLast)
+    if (!playerStateLast) {
+        return false;
+    } else {
+        return true;
+    }
+    return false;
 }
