@@ -1,8 +1,5 @@
 "use strict";
 
-let aiScript;
-let textThing;
-
 // Game setup
 function start() {
     document.addEventListener("mousedown", onMouseDown);
