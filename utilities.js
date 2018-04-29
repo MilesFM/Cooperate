@@ -60,33 +60,46 @@ function Vector2(x, y) {
     this.y = y;
 }
 
+let currentId;
 // For loading, playing and stopping audio.
 class Audio {
     constructor(audio) {
         this.aContext = new AudioContext();
-
         let request = new XMLHttpRequest();
         request.open("GET", audio, true);
         request.responseType = "arraybuffer";
+        
+        this.myAudioBuffer;
         request.onload = () => {
             this.aContext.decodeAudioData(request.response, (buffer) => {
-                this.myAudioBuffer = buffer;
-                console.log("Request successful");
-            }, onError);
-            request.send();
+                audioBuffer = buffer;
+                console.log("Audio request successful");
+            }, error);
         };
+        request.send();
+        this.myAudioBuffer = audioBuffer;
     }
     play() {
         this.source = this.aContext.createBufferSource();
-        this.soruce.buffer = this.myAudioBuffer;
-        this.source.connect(this.aContext.destination);
-        // Can only start once
-        this.source.start(0);
+        try {
+            if (this.myAudioBuffer === undefined) throw "Audio Buffer not defined!"
+            this.source.buffer = this.myAudioBuffer;
+            this.source.connect(this.aContext.destination);
+            // Can only start once
+            this.source.start(0);
+        } catch (err) {
+            console.error(err);
+            console.log(this.source);
+            delete this.source;
+        }
     }
     stop() {
         // Can only stop once
         this.source.stop();
         delete this.source;
+    }
+    error() {
+        console.error("Audio error");
     }
 }
 
@@ -120,6 +133,7 @@ function getAIScript(scriptLocation) {
 
 /**
  * Gets the file and writes the contents to the passed object to .text
+ * To pass by reference, an object must be passed and cann't return due to already in a function
  * @param {string}
  * @param {object}
  */

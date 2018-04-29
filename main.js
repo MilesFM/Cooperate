@@ -6,7 +6,9 @@ function start() {
     document.addEventListener("mouseup", onMouseUp);
     document.addEventListener("mousemove", mouseMove);
 
-    getAIScript("aiScripts/defectdefect-coopcoop.js");
+    getAIScript("./aiScripts/defectdefect-coopcoop.js");
+
+    getFile("./text/about.txt", aboutTextFile);
 
     buttonsSetup();
 }
@@ -38,22 +40,11 @@ function draw() {
 function menuDraw() {
     // Background
     drawSquare(0, 0, canvas.width, canvas.height, "#000");
-
-    singlePlayerButton.x = (canvas.width / 2) - singlePlayerButton.w/2;
-    singlePlayerButton.y = (canvas.height / 2) - singlePlayerButton.h/2  - 125;
-    singlePlayerButton.draw();
-
-    multiplayerPlayerButton.x = (canvas.width / 2) - multiplayerPlayerButton.w/2;
-    multiplayerPlayerButton.y = (canvas.height / 2) - multiplayerPlayerButton.h/2  - 25;
-    multiplayerPlayerButton.draw();
-
-    aiButton.x = (canvas.width / 2) - aiButton.w/2;
-    aiButton.y = (canvas.height / 2) - aiButton.h/2  + 75;
-    aiButton.draw();
-
-    aboutButton.x = (canvas.width / 2) - aboutButton.w/2;
-    aboutButton.y = (canvas.height / 2) - aboutButton.h/2  + 175;
-    aboutButton.draw();
+    
+    singlePlayerButton.drawCentre(0, -125);
+    multiplayerPlayerButton.drawCentre(0, -25);
+    aiButton.drawCentre(0, 75);
+    aboutButton.drawCentre(0, 175);
 
     drawText("Cooperate", canvas.width/2, canvas.height/2-200, "red", "50px Arial", "centre");
 
@@ -64,7 +55,8 @@ function menuDraw() {
         closeAboutButton.y = (canvas.height / 2) + 100;
         closeAboutButton.draw();
 
-        //wrapText({text: "you aint working thing", x: 300, y: 300, style: "blue", font: "40px Arial", textAlign: "left"}, 20, 15);
+        drawText(aboutTextFile.text, 300, 300, "blue", "10px Arial", "left");
+        //wrapText({text: textFile.text, x: 300, y: 300, style: "blue", font: "40px Arial", textAlign: "left"}, 5, 5);
     }
 }
 
@@ -107,6 +99,11 @@ function buttonsSetup() {
         player1Coop = false;
         aiVsPlayer();
     }
+
+    backButton = new genericButton(null, null, 100, 50, "Back");
+    backButton.clickOnButton = () => {
+        scene = 0;
+    };
 
     // Singleplayer
 }

@@ -10,6 +10,8 @@ let closeAboutButton;
 
 let aboutPageShow = false;
 
+let aboutTextFile = {text:null};
+
 // Main Menu
 
 let coopButton;
@@ -28,3 +30,5 @@ let winner = null;
 let cursorPos = new Vector2(0, 0);
 
 let isPlaying = false;
+
+let backButton;

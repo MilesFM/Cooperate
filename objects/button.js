@@ -4,6 +4,8 @@
 /**
  * @class
  */
+
+const clickAudio = new Audio("./assets/Click.mp3");
 class button {
     /**
      * 
@@ -39,6 +41,9 @@ class button {
         // When the mouse is clicked
         this.mouseDownEventNum = mouseDownArray.push((event) => {
             if ((event.clientX >= this.x && event.clientX <= this.x+this.w) && (event.clientY >= this.y && event.clientY <=  this.y+this.h) && (event.button == 0)  && !this.disabled) {
+                // Click sound
+                clickAudio.play();
+
                 this.pressed = true;
                 this.clickOnButton();
             }
@@ -74,6 +79,11 @@ class button {
         let textScale = ((this.w + this.h) / 2) * this.scaleFactor;
         
         drawText(this.text, this.x+(this.w/2), this.y+(this.h/2)+(this.h/10), this.textColour, `${textScale}px Arial`, "center");
+    }
+    drawCentre(offsetX, offsetY) {
+        this.x = (canvas.width / 2) - this.w/2 + offsetX;
+        this.y = (canvas.height / 2) - this.h/2 + offsetY;
+        this.draw();
     }
     // Refine after object has been created
     clickOnButton() {
