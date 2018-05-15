@@ -13,16 +13,15 @@ function start() {
     buttonsSetup();
 }
 
-// Game logic
-function update() {
-}
-
 // Game rendering
 function draw() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
     switch (scene) {
+        case -1:
+            testDraw();
+            break;
         case 0:
             menuDraw();
             break;
@@ -58,52 +57,4 @@ function menuDraw() {
         drawText(aboutTextFile.text, 300, 300, "blue", "10px Arial", "left");
         //wrapText({text: textFile.text, x: 300, y: 300, style: "blue", font: "40px Arial", textAlign: "left"}, 5, 5);
     }
-}
-
-function buttonsSetup() {
-    // Main Menu
-
-    singlePlayerButton = new genericButton(null, null, 260, 75, "Singleplayer");
-    singlePlayerButton.clickOnButton = () => {
-        singlePlayerStart();
-        scene = 1;
-    };
-
-    multiplayerPlayerButton = new genericButton(null, null, 260, 75, "Multiplayer");
-    multiplayerPlayerButton.disabled = true;
-
-    aiButton = new genericButton(null, null, 260, 75, "AI Script");
-    aiButton.disabled = true;
-
-    aboutButton = new genericButton(null, null, 260, 75, "About");
-    aboutButton.clickOnButton = () => {
-        aboutPageShow = true;
-    };
-
-    closeAboutButton = new genericButton(null, null, 208, 60, "Close");
-    closeAboutButton.clickOnButton = () => {
-        aboutPageShow = false;
-    };
-
-    // Main Menu
-
-    // Singleplayer
-
-    coopButton = new genericButton(null, null, 225, 75, "Cooperate");
-    coopButton.clickOnButton = () => {
-        player1Coop = true;
-        aiVsPlayer();
-    }
-    defectButton = new genericButton(null, null, 225, 75, "Defect");
-    defectButton.clickOnButton = () => {
-        player1Coop = false;
-        aiVsPlayer();
-    }
-
-    backButton = new genericButton(null, null, 100, 50, "Back");
-    backButton.clickOnButton = () => {
-        scene = 0;
-    };
-
-    // Singleplayer
 }

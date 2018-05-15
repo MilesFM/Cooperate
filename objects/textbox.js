@@ -1,8 +1,18 @@
 "use strict";
-
-
 class textBox {
-    constructor(x, y, w, h, predefinedtText, colour, textColour, borderColour, scaleFactor) {
+    /**
+     * 
+     * @param {number} x 
+     * @param {number} y 
+     * @param {number} w 
+     * @param {number} h 
+     * @param {string} text 
+     * @param {string} colour 
+     * @param {string} textColour 
+     * @param {string} borderColour
+     * @param {number} scaleFactor
+     */
+    constructor(x, y, w, h, text, colour, textColour, borderColour, scaleFactor) {
         this.x = x;
         this.y = y;
         this.w = w;
@@ -11,6 +21,7 @@ class textBox {
         this.colour = colour;
         this.textColour = textColour;
         this.borderColour = borderColour;
+        this.activeScenes = activeScenes;
 
         if (scaleFactor == null) {
             this.scaleFactor = 0.25;
@@ -23,16 +34,29 @@ class textBox {
 
         // When the mouse is clicked
         this.mouseDownEventNum = mouseDownArray.push((event) => {
-            if ((event.clientX >= this.x && event.clientX <= this.x+this.w) && (event.clientY >= this.y && event.clientY <=  this.y+this.h) && (event.button == 0)  && !this.disabled) {
-                this.pressed = true;
-                this.clickOnButton();
+            if (
+                (event.clientX >= this.x 
+                && event.clientX <= this.x+this.w) 
+                && (event.clientY >= this.y
+                && event.clientY <=  this.y+this.h) 
+                && (event.button == 0) && !this.disabled
+                && this.isActiveInScene()
+            ) {  
+                    // Click sound
+                    clickAudio.play();
+
+                    this.pressed = true;
+                    this.clickOnButton();
             }
             return;
         });
 
         // When the mouse is released
         this.mouseUpEventNum = mouseUpArray.push((event) => {
-            if (event.button == 0 || this.disabled) {
+            if (
+                event.button == 0
+                && !this.disabled
+            ) {
                 this.pressed = false;
             }
             return;
@@ -60,11 +84,55 @@ class textBox {
         
         drawText(this.text, this.x+(this.w/2), this.y+(this.h/2)+(this.h/10), this.textColour, `${textScale}px Arial`, "center");
     }
+    drawCentre(offsetX, offsetY) {
+        this.x = (canvas.width / 2) - this.w/2 + offsetX;
+        this.y = (canvas.height / 2) - this.h/2 + offsetY;
+        this.draw();
+    }
     // Refine after object has been created
     clickOnButton() {
         return;
     }
     removeEvent() {
         mouseDownArray = mouseDownArray.splice(mouseDownEventNum-1, 1);
+    }
+    switchState() {
+        if (this.disabled) {
+            this.disabled = false;
+        } else {
+            this.disabled = true;
+        }
+    }
+    // Checks if the button should be active in that current scene
+    isActiveInScene() {
+        if (this.activeScenes === "all") {
+            return true;
+        } else if (Array.isArray(this.activeScenes)) {
+            // If there is an array, check if the current scene allows the button to be activated
+            for (let element of this.activeScenes) {
+                console.log(element);
+                if (element === scene) {
+                    return true;
+                }
+            }
+            return false;
+        } else {
+            return false;
+        }
+    }
+}
+
+// This button is used where I just want to use a simple button
+class genericButton extends button {
+    /**
+     * 
+     * @param {number} x 
+     * @param {number} y 
+     * @param {number} w 
+     * @param {number} h 
+     * @param {string} text 
+     */
+    constructor(x, y, w, h, text) {
+        super(x, y, w, h, text, "white", "black", "grey", 0.2);
     }
 }

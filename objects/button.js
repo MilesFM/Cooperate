@@ -6,6 +6,7 @@
  */
 
 const clickAudio = new Audio("./assets/Click.mp3");
+let activeScenes = "all"; // To prevent righting this out for mutliple buttons
 class button {
     /**
      * 
@@ -28,6 +29,7 @@ class button {
         this.colour = colour;
         this.textColour = textColour;
         this.borderColour = borderColour;
+        this.activeScenes = activeScenes;
 
         if (scaleFactor == null) {
             this.scaleFactor = 0.25;
@@ -40,19 +42,29 @@ class button {
 
         // When the mouse is clicked
         this.mouseDownEventNum = mouseDownArray.push((event) => {
-            if ((event.clientX >= this.x && event.clientX <= this.x+this.w) && (event.clientY >= this.y && event.clientY <=  this.y+this.h) && (event.button == 0)  && !this.disabled) {
-                // Click sound
-                clickAudio.play();
+            if (
+                (event.clientX >= this.x 
+                && event.clientX <= this.x+this.w) 
+                && (event.clientY >= this.y
+                && event.clientY <=  this.y+this.h) 
+                && (event.button == 0) && !this.disabled
+                && this.isActiveInScene()
+            ) {  
+                    // Click sound
+                    clickAudio.play();
 
-                this.pressed = true;
-                this.clickOnButton();
+                    this.pressed = true;
+                    this.clickOnButton();
             }
             return;
         });
 
         // When the mouse is released
         this.mouseUpEventNum = mouseUpArray.push((event) => {
-            if (event.button == 0 || this.disabled) {
+            if (
+                event.button == 0
+                && !this.disabled
+            ) {
                 this.pressed = false;
             }
             return;
@@ -91,6 +103,30 @@ class button {
     }
     removeEvent() {
         mouseDownArray = mouseDownArray.splice(mouseDownEventNum-1, 1);
+    }
+    switchState() {
+        if (this.disabled) {
+            this.disabled = false;
+        } else {
+            this.disabled = true;
+        }
+    }
+    // Checks if the button should be active in that current scene
+    isActiveInScene() {
+        if (this.activeScenes === "all") {
+            return true;
+        } else if (Array.isArray(this.activeScenes)) {
+            // If there is an array, check if the current scene allows the button to be activated
+            for (let element of this.activeScenes) {
+                console.log(element);
+                if (element === scene) {
+                    return true;
+                }
+            }
+            return false;
+        } else {
+            return false;
+        }
     }
 }
 

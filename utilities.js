@@ -60,24 +60,40 @@ function Vector2(x, y) {
     this.y = y;
 }
 
-let currentId;
+// Called by Audio class
+function setupAudio(audio) {
+    let audioHolder = {
+        aContext: new AudioContext(),
+        myAudioBuffer: undefined
+    };
+    /*let aContext = new AudioContext();
+    let myAudioBuffer;*/
+
+    let request = new XMLHttpRequest();
+    request.open("GET", audio, true);
+    request.responseType = "arraybuffer";
+    request.onload = () => {
+        audioHolder.aContext.decodeAudioData(request.response, (buffer) => {
+            audioHolder.myAudioBuffer = buffer;
+            console.log("Audio request successful");
+        }, audioError);
+    };
+    request.send();
+    //return audioHolder;
+    return [audioHolder.aContext, audioHolder.myAudioBuffer];
+}
+
+function audioError() {
+    console.error("Audio decode error!");
+}
+
 // For loading, playing and stopping audio.
 class Audio {
     constructor(audio) {
-        this.aContext = new AudioContext();
-        let request = new XMLHttpRequest();
-        request.open("GET", audio, true);
-        request.responseType = "arraybuffer";
-        
-        this.myAudioBuffer;
-        request.onload = () => {
-            this.aContext.decodeAudioData(request.response, (buffer) => {
-                audioBuffer = buffer;
-                console.log("Audio request successful");
-            }, error);
-        };
-        request.send();
-        this.myAudioBuffer = audioBuffer;
+        this.result = setupAudio(audio);
+        this.aContext = this.result[0];
+        this.myAudioBuffer = this.result[1];
+        console.log("Created audio!");
     }
     play() {
         this.source = this.aContext.createBufferSource();
@@ -97,9 +113,6 @@ class Audio {
         // Can only stop once
         this.source.stop();
         delete this.source;
-    }
-    error() {
-        console.error("Audio error");
     }
 }
 
