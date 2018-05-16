@@ -39,6 +39,7 @@ function singlePlayerStart() {
     winner = null;
     isPlaying = true;
     player1StateLast = null;
+    getAIScript(options.startingaiScript);
 }
 
 function aiVsPlayer() {

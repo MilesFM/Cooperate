@@ -130,7 +130,7 @@ function getAIScript(scriptLocation) {
     req.open("GET", scriptLocation, true);
     req.onreadystatechange = () => {
         try {
-            if (aiScriptElement != undefined) {
+            if (aiScriptElement !== undefined) {
                 aiScriptElement.parentNode.removeChild(aiScriptElement);
             }
             aiScriptElement = document.createElement("script");
@@ -144,24 +144,40 @@ function getAIScript(scriptLocation) {
     req.send(null);
 }
 
-/**
- * Gets the file and writes the contents to the passed object to .text
- * To pass by reference, an object must be passed and cann't return due to already in a function
- * @param {string}
- * @param {object}
- */
-function getFile(fileLocation, fileContents) {
-    let req = new XMLHttpRequest();
-    req.responseType = "text";
-    req.open("GET", fileLocation, true);
-    req.onreadystatechange = () => {
-        try {
-            fileContents.text = req.responseText;
-        } catch (err) {
-            console.error(err);
-        }
-    };
-    req.send(null);
+function getFile(fileLocation) {
+    return new Promise((resolve, reject) => {
+        let req = new XMLHttpRequest();
+        req.responseType = "text";
+        req.open("GET", fileLocation, true);
+        req.onload = () => {
+            let status = req.status;
+            if (status === 200) {
+                resolve(req.response);
+            } else {
+                console.error(`Error: ${status}`);
+                reject(status);
+            }
+        };
+        req.send(null);
+    });
+}
+
+function getJSON(fileLocation) {
+    return new Promise((resolve, reject) => {
+        let req = new XMLHttpRequest();
+        req.responseType = "json";
+        req.open("GET", fileLocation, true);
+        req.onload = () => {
+            let status = req.status;
+            if (status === 200) {
+                resolve(req.response);
+            } else {
+                console.error(`Error: ${status}`);
+                reject(status);
+            }
+        };
+        req.send(null);
+    });
 }
 
 function wrapText(drawTextFuncInput, maxWidth, lineHeight) {

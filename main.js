@@ -6,9 +6,13 @@ function start() {
     document.addEventListener("mouseup", onMouseUp);
     document.addEventListener("mousemove", mouseMove);
 
-    getAIScript("./aiScripts/defectdefect-coopcoop.js");
+    getJSON("./options.json").then((data) => {
+        options = data;
+    });
 
-    getFile("./text/about.txt", aboutTextFile);
+    getFile("./text/about.txt").then((data) => {
+        aboutTextFile = data;
+    });
 
     buttonsSetup();
 }
