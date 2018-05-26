@@ -1,5 +1,5 @@
 {
-    "startingScene": -1,
+    "startingScene": 0,
     "startingaiScript": "./aiScripts/defectdefect-coopcoop.js",
     "singlePlayerCost": 2000
 }

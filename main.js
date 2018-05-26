@@ -6,17 +6,13 @@ function start() {
     document.addEventListener("mouseup", onMouseUp);
     document.addEventListener("mousemove", mouseMove);
 
-    getJSON("./options.json").then((data) => {
-        options = data;
-    });
-
     getFile("./text/about.txt").then((data) => {
         aboutTextFile = data;
     });
 
-    checkOption = setInterval(optionsCheck, 10);
-
     buttonsSetup();
+
+    scene = options.startingScene;
 }
 
 // Game rendering
@@ -64,13 +60,3 @@ function menuDraw() {
         //wrapText({text: textFile.text, x: 300, y: 300, style: "blue", font: "40px Arial", textAlign: "left"}, 5, 5);
     }
 }
-
-function optionsCheck() {
-    if (options !== undefined) {
-        console.log("test");
-        clearInterval(checkOption);
-        scene = options.startingScene;
-    }
-}
-
-let checkOption;

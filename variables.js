@@ -1,7 +1,5 @@
 "use strict";
 
-let options = undefined; // Loaded from external JSON file
-
 // Main Menu
 
 let singlePlayerButton;

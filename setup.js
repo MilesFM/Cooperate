@@ -4,12 +4,13 @@ const canvas = document.createElement("canvas");
 const context = canvas.getContext("2d");
 
 const frameRate = 1000/30;
-const tickRate = 10;
 
 let drawInterval;
-let updateInterval;
 
 let scene = 0;
+
+let options; // Loaded from external JSON file
+let checkOption;
 
 // Sets up game
 window.onload = () => {
@@ -19,14 +20,25 @@ window.onload = () => {
 
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    
-    start();
 
-    /*updateInterval = setInterval(() => {
-        update();
-    }, tickRate);*/
+    getJSON("./options.json").then((data) => {
+        options = data;
+    });
+
+    checkOption = setInterval(optionsCheck, 10);
 
     drawInterval = setInterval(() => {
-        draw();
+        if (options !== undefined){
+            draw();
+        }
     }, frameRate);
 }
+
+function optionsCheck() {
+    if (options !== undefined) {
+        console.log("test");
+        clearInterval(checkOption);
+        start();
+    }
+}
+
