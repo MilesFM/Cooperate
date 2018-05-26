@@ -14,6 +14,8 @@ function start() {
         aboutTextFile = data;
     });
 
+    checkOption = setInterval(optionsCheck, 10);
+
     buttonsSetup();
 }
 
@@ -62,3 +64,13 @@ function menuDraw() {
         //wrapText({text: textFile.text, x: 300, y: 300, style: "blue", font: "40px Arial", textAlign: "left"}, 5, 5);
     }
 }
+
+function optionsCheck() {
+    if (options !== undefined) {
+        console.log("test");
+        clearInterval(checkOption);
+        scene = options.startingScene;
+    }
+}
+
+let checkOption;

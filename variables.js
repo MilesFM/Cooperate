@@ -1,6 +1,6 @@
 "use strict";
 
-let options = []; // Loaded from external JSON file
+let options = undefined; // Loaded from external JSON file
 
 // Main Menu
 
