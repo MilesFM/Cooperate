@@ -1,0 +1,95 @@
+5) Grim trigger (Grim): Cooperates, until the opponent defects, and thereafter always defects.
+
+6) Pavlov: Cooperates on the first move. If a reward or temptation payoff is received in the last round then repeats last choice, otherwise chooses the opposite choice.
+
+7) Tit for Two Tats (TFTT): Cooperates on the first move, and defects only when the opponent defects two times.
+
+8) Two Tits for Tat (TTFT): Same as Tit for Tat except that it defects twice when the opponent defects.
+
+9) Gradual: Cooperates on the first move, and cooperates as long as the opponent cooperates. After the first defection of the other player, it defects one time and cooperates two times; ... After the nth defection it reacts with n consecutive defections and then calms down its opponent with two cooperations.
+
+10) Soft Majority (SM): Cooperates on the first move, and cooperates as long as the number of times the opponent has cooperated is greater than or equal to the number of times it has defected, else it defects.
+
+11) Hard Majority (HM): Defects on the first move, and defects if the number of defections of the opponent is greater than or equal to the number of times it has cooperated, else cooperates.
+
+12) Naive Prober (NP): Like Tit for Tat, but occasionally defects with a small probability.
+
+13) Remorseful Prober (RP): Like Naive Prober, but it tries to break the series of mutual defections after defecting.
+
+14) Soft Grudger (SGRIM): Like GRIM except that the opponent is punished with D,D,D,D,C,C.
+
+15) Prober: Starts with D,C,C and then defects if the opponent has cooperated in the second and third move; otherwise, it plays TFT.
+
+16) Firm But Fair (FBF): Cooperates on the first move, and cooperates except after receiving a sucker payoff.
+
+* Variants of TFT:
+
+17) Generous Tit for Tat (GTFT): Same as TFT, except that it cooperates with a probability q when the opponent defects.
+
+18) Suspicious Tit for Tat (STFT): Same as TFT, except that it defects on the first move.
+
+19) Hard Tit for Tat (HTFT): Cooperates on the first move, and defects if the opponent has defects on any of the previous three moves, else cooperates.
+
+20) Contrite TFT (CTFT): Same as TFT when no noise. In a noisy environment, once it receives T because of error, it will choose cooperate twice in order recover mutual cooperation. 
+
+21) Reverse Tit for Tat (RTFT): It does the reverse of TFT. It defects on the first move, then plays the reverse of the opponent’s last move. 
+
+* Adaptive strategies:
+
+22) Adaptive Tit For Tat (ATFT): An adaption rate r is used to compute a continuous variable ‘world’ according to the history moves of the opponent. The logic of the strategy is shown as below. 
+
+If (opponent played C in the last cycle) then
+
+world = world + r*(1-world), r is the adaptation rate
+
+else
+
+world = world + r*(0-world)
+
+If (world >= 0.5) play C, else play D
+
+23) Adaptive: Starts with C,C,C,C,C,C,D,D,D,D,D and then takes choices which have given the best average score re-calculated after every move.
+
+* Heuristic or Rule-based strategies:
+
+24) APavlov: Plays TFT in the first six moves and identifies the opponent by means of a rule-based mechanism. The strategies of the opponent are categorized into four groups: cooperative, AllD, STFT, and Random. If the opponent does not start defecting, it is identified to be cooperative and then APavlov will behave as TFT. If the opponent defects more than four times in six consecutive moves, it is identified as an AllD type and then APavlov will always defect. If the opponent just defects three times in six moves, it is identified as STFT type and then APavlov will adopt TFTT in order to recover mutual cooperation. Any strategy that does not belong to the former three categories will be identified as a random type. In this situation, APavlov will always defect. In order to deal with the situations in which the opponents may change their actions, the average payoff is computed every six rounds. If it is lower than a threshold, the process of opponent identification may restart. 
+
+25) Omega Tit For Tat (OTFT): Starts with C, then plays TFT. It then keeps tracking of randomness of the opponent and deadlock. Based on mutual cooperation as the mutually most beneficial case, each change of move of the opponent makes the randomness value increase. If the randomness value exceeds a threshold, OTFT will play AllD. If a deadlock is detected, OTFT will play an extra C in order to recover from the deadlock. 
+
+* Group strategies:
+
+26) Handshake: Defects on the first move and cooperates on the second move. If the opponent behaves the same as Handshake does, it always cooperates. Otherwise, it always defects.
+
+27) Fortress3: Like Handshake, it tries to recognize kin member by playing D,D,C. If the opponent plays the same sequence of D,D,C, it cooperates until the opponent defects. Otherwise, it defects until the opponent defects on continuous two moves, and then it cooperates on the following move.
+
+28) Fortress4: Same as Fortress3 except that it plays D,D,D,C in recognizing kin members. If the opponent plays the same sequence of D,D,D,C, it cooperates until the opponent defects. Otherwise, it defects until the opponent defects on continuous three moves, and then it cooperates on the following move.
+
+29) Collective strategy (CS): Plays C and D in the first and second move. If the opponent has played the same moves, CS plays TFT. Otherwise, CS plays AllD.
+
+30) Southampton Group strategies (SGS): A group of strategies are designed to recognize each other through a predetermined sequence of 5-10 moves at the start. Once two SGSs recognize each other, they will act as a 'master' or 'slave' role - a master will always defect while a slave will always cooperate in order for the master to win the maximum points. If the opponent is recognized as not being a SGS, it will immediately defect to minimize the score of the opponent.
+
+* Zero-Determinant strategies:
+
+31) Extort-2: Enforces a linear relationship, SX - P = 2(SY - P), between the two IPD strategies’ scores. Here SX and SY are the payoff of Extort-2 and its opponent respectively. Extort-2 guarantees itself twice the share of payoffs above P, compared with those received by the opponent.
+
+32) ZDGTFT-2: Forces the relationship SX - R = 2(SY - R) between the two strategies’ scores.
+
+
+
+Implemented stategies: 
+1) Always Cooperate (AllC): Cooperates on every move.
+
+2) Always Defect (AllD): Defects on every move.
+
+3) Random Player (RAND): Makes a random move.
+
+4) Tit for Tat (TFT): Cooperates on the first move, then copies the opponent’s last move.
+
+
+
+
+
+
+
+
+Source: http://www.prisoners-dilemma.com/strategies.html

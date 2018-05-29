@@ -1,5 +1,26 @@
 {
     "startingScene": 0,
-    "startingaiScript": "./aiScripts/defectdefect-coopcoop.js",
-    "singlePlayerCost": 2000
+    "startingaiScript": "./aiScripts/randomplayer.js",
+    
+    "_comment": "OBSELETE",
+    "startCost": 2000,
+    "_comment": "OBSELETE",
+
+    "mode": 0,
+    "competitive": {
+        "id": 0,
+        "startCost": 2000,
+        "coopcoop": 25,
+        "defectdefect": -25,
+        "betray": 100,
+        "betrayed": -50
+    },
+    "noncompetitive": {
+        "id": 1,
+        "startCost": 0,
+        "coopcoop": 50,
+        "defectdefect": 25,
+        "betray": 100,
+        "betrayed": 0
+    }
 }

@@ -34,8 +34,8 @@ function singlePlayerDraw() {
 }
 
 function singlePlayerStart() {
-    player1Money = 2000;
-    aiMoney = options.singlePlayerCost;
+    player1Money = options.startCost;
+    aiMoney = options.startCost;
     winner = null;
     isPlaying = true;
     player1StateLast = null;
