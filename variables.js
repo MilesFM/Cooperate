@@ -25,10 +25,12 @@ let aiCoop = null;
 
 let player1StateLast = null;
  
-let winner = null;
+let gameStateText = null; // Used to display winner (if competitive) or if the game has ended
+
+let round = 0;
 
 let cursorPos = new Vector2(0, 0);
 
 let isPlaying = false;
 
-let backButton;
+let backButton; 
