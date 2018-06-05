@@ -36,7 +36,6 @@ window.onload = () => {
 
 function optionsCheck() {
     if (options !== undefined) {
-        console.log("test");
         clearInterval(checkOption);
         start();
     }

@@ -66,7 +66,7 @@ function aiVsPlayer() {
     }
 
     switch (options.mode){
-        case 0:
+        case 0: // Competitive
             checkRoundWinner(options.competitive);
 
             if (((aiMoney >= 3000) && (player1Money >= 3000)) || ((aiMoney <= 0) && (player1Money <= 0))) {
@@ -82,7 +82,7 @@ function aiVsPlayer() {
                 gameStateText = null;
             }
             break;
-        case 1:
+        case 1: // Noncompetitive
             checkRoundWinner(options.noncompetitive);
             round++;
             break;

@@ -5,6 +5,8 @@ function start() {
     document.addEventListener("mousedown", onMouseDown);
     document.addEventListener("mouseup", onMouseUp);
     document.addEventListener("mousemove", mouseMove);
+    //document.addEventListener("keydown", keyDown);
+    document.addEventListener("keypress", keyPress);
 
     getFile("./text/about.txt").then((data) => {
         aboutTextFile = data;

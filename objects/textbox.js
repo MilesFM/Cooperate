@@ -30,7 +30,7 @@ class textBox {
         }
 
         this.disabled = false;
-        this.pressed = false;
+        this.typing = false;
 
         // When the mouse is clicked
         this.mouseDownEventNum = mouseDownArray.push((event) => {
@@ -45,21 +45,14 @@ class textBox {
                     // Click sound
                     clickAudio.play();
 
-                    this.pressed = true;
+                    this.typing = !this.typing;
                     this.clickOnButton();
             }
             return;
         });
 
-        // When the mouse is released
-        this.mouseUpEventNum = mouseUpArray.push((event) => {
-            if (
-                event.button == 0
-                && !this.disabled
-            ) {
-                this.pressed = false;
-            }
-            return;
+        this.keyPressEvent = keyPressArray.push((event) => {
+            console.log(event);
         });
     }
     draw() {
@@ -68,13 +61,8 @@ class textBox {
             If it isn't disabled but it's pressed, invert the border colour and the fill colour
         */
         if (!this.disabled) {
-            if (!this.pressed) {
-                drawSquare(this.x, this.y, this.w, this.h, this.colour);
-                drawSquareNoFill(this.x, this.y, this.w, this.h, this.borderColour, "5");
-            } else {
-                drawSquare(this.x, this.y, this.w, this.h, this.borderColour);
-                drawSquareNoFill(this.x, this.y, this.w, this.h, this.colour, "5");
-            }
+            drawSquare(this.x, this.y, this.w, this.h, this.borderColour);
+            drawSquareNoFill(this.x, this.y, this.w, this.h, this.colour, "5");
         } else {
             drawSquare(this.x, this.y, this.w, this.h, this.borderColour);
         }
@@ -123,7 +111,7 @@ class textBox {
 }
 
 // This button is used where I just want to use a simple button
-class genericButton extends button {
+class genericTextBox extends textBox {
     /**
      * 
      * @param {number} x 
