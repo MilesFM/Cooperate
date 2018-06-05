@@ -9,8 +9,11 @@
  * @param {number} opMoney 
  * Return true to Cooperate, return false to defect
  */
+
+let playerStateTwoRoundsAgo = null;
 function ai(playerStateLast, money, opMoney) {
-    if (playerStateLast === null || playerStateLast === true) {
+    if (playerStateLast === null || playerStateLast === true || || playerStateTwoRoundsAgo === true) {
+	playerStateTwoRoundsAgo = playerStateLast;
         return true;
     }
     return playerStateLast;

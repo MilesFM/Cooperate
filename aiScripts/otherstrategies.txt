@@ -2,8 +2,6 @@
 
 6) Pavlov: Cooperates on the first move. If a reward or temptation payoff is received in the last round then repeats last choice, otherwise chooses the opposite choice.
 
-7) Tit for Two Tats (TFTT): Cooperates on the first move, and defects only when the opponent defects two times.
-
 8) Two Tits for Tat (TTFT): Same as Tit for Tat except that it defects twice when the opponent defects.
 
 9) Gradual: Cooperates on the first move, and cooperates as long as the opponent cooperates. After the first defection of the other player, it defects one time and cooperates two times; ... After the nth defection it reacts with n consecutive defections and then calms down its opponent with two cooperations.
