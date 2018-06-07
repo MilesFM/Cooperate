@@ -1,13 +1,5 @@
 // For sound in the game
 
-/*
-class Buffer {
-    constructor() {
-
-    }
-}
-*/
-
 // Called by Audio class for WebAudio
 function setupAudioWA(audio) {
     let audioHolder = {
