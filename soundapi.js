@@ -1,57 +1,29 @@
 // For sound in the game
 
-// Called by Audio class for WebAudio
-function setupAudioWA(audio) {
-    let audioHolder = {
-        aContext: new (AudioContext || webkitwebkitAudioContext)(),
-        myAudioBuffer: undefined
-    };
-    /*let aContext = new AudioContext();
-    let myAudioBuffer;*/
 
-    let request = new XMLHttpRequest();
-    request.open("GET", audio, true);
-    request.responseType = "arraybuffer";
-    request.onload = () => {
-        audioHolder.aContext.decodeAudioData(request.response, (buffer) => {
-            audioHolder.myAudioBuffer = buffer;
-            console.log("Audio request successful");
-        }, audioError);
-    };
-    request.send();
-    //return audioHolder;
-    return [audioHolder.aContext, audioHolder.myAudioBuffer];
-}
-
-// Called by Audio class for Audio element
-function setupAudioAE(audio) {
-    let sound = document.createElement("audio");
-    sound.src = audio;
-    sound.setAttribute("preload", "auto");
-    sound.setAttribute("controls", "none");
-    sound.style.display = "none";
-    document.body.appendChild(sound);
-    return sound;
-}
-
-function audioError() {
-    console.error("Audio decode error!");
-}
-
-let forceAudioElementMode = true;
 // For loading, playing and stopping audio.
 class Audio {
-    constructor(audio) {
+    constructor(url) {
         if (forceAudioElementMode || (AudioContext === undefined && webkitAudioContext === undefined)) {
             this.webaudio = false;
-            this.sound = setupAudioAE(audio);
+            this.sound = setupAudioAE(url);
             return;
         }
+
         this.webaudio = true;
-        this.result = setupAudioWA(audio);
-        this.aContext = this.result[0];
-        this.myAudioBuffer = this.result[1];
+
+        this.aContext = new (AudioContext || webkitwebkitAudioContext)();
+        this.bufferObject = new Buffer(url, this.aContext);
+
+        
         console.log("Created audio!");
+    }
+    loadSound() {
+        try {
+            this.buffer = bufferObject.buffer;
+        } catch (err) {
+            console.error(`An error in the Audio class has occured: ${err}`);
+        }
     }
     play() {
         if (!this.webaudio) {
@@ -60,8 +32,8 @@ class Audio {
         }
         this.source = this.aContext.createBufferSource();
         try {
-            if (this.myAudioBuffer === undefined) throw "Audio Buffer not defined!"
-            this.source.buffer = this.myAudioBuffer;
+            if (this.buffer === undefined) throw "Audio Buffer not defined!";
+            this.source.buffer = this.buffer;
             this.source.connect(this.aContext.destination);
             // Can only start once
             this.source.start(0);
@@ -69,6 +41,7 @@ class Audio {
             console.error(err);
             console.log(this.source);
             delete this.source;
+            loadSound();
         }
     }
     stop() {
@@ -80,4 +53,39 @@ class Audio {
         this.source.stop();
         delete this.source;
     }
+}
+
+// To hold the buffer
+class Buffer {
+    constructor(context, url) {
+        this.context = context;
+        this.url = url;
+        this.buffer;
+    }
+
+    loadSound() {
+        let req = new XMLHttpRequest();
+        req.open("GET", this.url, true);
+        req.responseType = "arraybuffer";
+        let thisBuffer = this; // pass via reference
+        req.onload = () => {
+            thisBuffer.context.decodeAudioData(req.response, (buffer) => {
+                thisBuffer.buffer = buffer;
+                console.info(`Request to ${thisBuffer.url} successful!`);
+            });
+        };
+        req.send();
+    }
+}
+
+// Called by Audio class for Audio element
+let forceAudioElementMode = true;
+function setupAudioAE(url) {
+    let sound = document.createElement("audio");
+    sound.src = url;
+    sound.setAttribute("preload", "auto");
+    sound.setAttribute("controls", "none");
+    sound.style.display = "none";
+    document.body.appendChild(sound);
+    return sound;
 }
