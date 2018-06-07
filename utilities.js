@@ -60,62 +60,6 @@ function Vector2(x, y) {
     this.y = y;
 }
 
-// Called by Audio class
-function setupAudio(audio) {
-    let audioHolder = {
-        aContext: new AudioContext(),
-        myAudioBuffer: undefined
-    };
-    /*let aContext = new AudioContext();
-    let myAudioBuffer;*/
-
-    let request = new XMLHttpRequest();
-    request.open("GET", audio, true);
-    request.responseType = "arraybuffer";
-    request.onload = () => {
-        audioHolder.aContext.decodeAudioData(request.response, (buffer) => {
-            audioHolder.myAudioBuffer = buffer;
-            console.log("Audio request successful");
-        }, audioError);
-    };
-    request.send();
-    //return audioHolder;
-    return [audioHolder.aContext, audioHolder.myAudioBuffer];
-}
-
-function audioError() {
-    console.error("Audio decode error!");
-}
-
-// For loading, playing and stopping audio.
-class Audio {
-    constructor(audio) {
-        this.result = setupAudio(audio);
-        this.aContext = this.result[0];
-        this.myAudioBuffer = this.result[1];
-        console.log("Created audio!");
-    }
-    play() {
-        this.source = this.aContext.createBufferSource();
-        try {
-            if (this.myAudioBuffer === undefined) throw "Audio Buffer not defined!"
-            this.source.buffer = this.myAudioBuffer;
-            this.source.connect(this.aContext.destination);
-            // Can only start once
-            this.source.start(0);
-        } catch (err) {
-            console.error(err);
-            console.log(this.source);
-            delete this.source;
-        }
-    }
-    stop() {
-        // Can only stop once
-        this.source.stop();
-        delete this.source;
-    }
-}
-
 function drawImage(src, x, y, w, h) {
     let img = new Image();
     img.src = src;

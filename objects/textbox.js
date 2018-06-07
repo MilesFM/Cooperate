@@ -42,9 +42,6 @@ class textBox {
                 && (event.button == 0) && !this.disabled
                 && this.isActiveInScene()
             ) {  
-                    // Click sound
-                    clickAudio.play();
-
                     this.typing = !this.typing;
                     this.clickOnButton();
             }

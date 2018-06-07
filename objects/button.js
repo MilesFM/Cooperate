@@ -5,7 +5,8 @@
  * @class
  */
 
-const clickAudio = new Audio("./assets/Click.mp3");
+const clickDownAudio = new Audio("./assets/Click2.mp3");
+const clickUpAudio = new Audio("./assets/Click3.mp3");
 let activeScenes = "all"; // To prevent righting this out for mutliple buttons
 class button {
     /**
@@ -51,7 +52,7 @@ class button {
                 && this.isActiveInScene()
             ) {  
                     // Click sound
-                    clickAudio.play();
+                    clickDownAudio.play();
 
                     this.pressed = true;
                     this.clickOnButton();
@@ -64,8 +65,10 @@ class button {
             if (
                 event.button == 0
                 && !this.disabled
+                && this.pressed
             ) {
                 this.pressed = false;
+                clickUpAudio.play();
             }
             return;
         });
