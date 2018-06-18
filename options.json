@@ -1,7 +1,9 @@
 {
     "startingScene": 0,
     "startingaiScript": "./aiScripts/randomplayer.js",
+    "_comment": "NOT WORKING!",
     "forceAudioElementMode": false,
+    "_comment": "NOT WORKING!",
 
     "mode": 1,
     

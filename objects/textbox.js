@@ -43,7 +43,6 @@ class textBox {
                 && this.isActiveInScene()
             ) {  
                     this.typing = !this.typing;
-                    this.clickOnButton();
             }
             return;
         });
@@ -73,10 +72,6 @@ class textBox {
         this.x = (canvas.width / 2) - this.w/2 + offsetX;
         this.y = (canvas.height / 2) - this.h/2 + offsetY;
         this.draw();
-    }
-    // Refine after object has been created
-    clickOnButton() {
-        return;
     }
     removeEvent() {
         mouseDownArray = mouseDownArray.splice(mouseDownEventNum-1, 1);
