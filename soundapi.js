@@ -4,7 +4,7 @@
 // For loading, playing and stopping audio.
 class Audio {
     constructor(url) {
-        if (forceAudioElementMode || (AudioContext === undefined && webkitAudioContext === undefined)) {
+        if (options.forceAudioElementMode || (AudioContext === undefined && webkitAudioContext === undefined)) {
             this.webaudio = false;
             this.sound = setupAudioAE(url);
             return;
@@ -78,8 +78,6 @@ class Buffer {
     }
 }
 
-// Called by Audio class for Audio element
-let forceAudioElementMode = true;
 function setupAudioAE(url) {
     let sound = document.createElement("audio");
     sound.src = url;

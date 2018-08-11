@@ -5,8 +5,8 @@
  * @class
  */
 
-const clickDownAudio = new Audio("./assets/Click2.mp3");
-const clickUpAudio = new Audio("./assets/Click3.mp3");
+let clickDownAudio;
+let clickUpAudio;
 let activeScenes = "all"; // To prevent righting this out for mutliple buttons
 class button {
     /**
@@ -72,6 +72,13 @@ class button {
             }
             return;
         });
+
+        if (clickDownAudio === undefined) {
+            clickDownAudio = new Audio("./assets/Click2.mp3");
+        }
+        if (clickUpAudio === undefined) {
+            clickUpAudio = new Audio("./assets/Click3.mp3");
+        }
     }
     draw() {
         /*
