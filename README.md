@@ -8,7 +8,7 @@ The current website to view the project is on [GitHub Pages](https://milesfm.git
 * Custom AI - Half implemented
 * Multiplayer (in the far future) using 
 * An itch.io page 
-~~* A C++ version (hopefully)~~Cancelled
+* ~~A C++ version (hopefully)~~Cancelled
 * A website 
 
 ## Libraries
